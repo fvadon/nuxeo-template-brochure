@@ -1,0 +1,18 @@
+<component  name="org.nuxeo.template.brochure.context.contrib">
+
+ <extension target="org.nuxeo.template.service.TemplateProcessorComponent" point="contextExtension">
+
+    <documentation>
+      Adds utility functions in the context
+      <ul>
+        <li>brochure.getChildrenPartsForGroup(brochureUID, userGroup)</li>
+      </ul>
+    </documentation>
+
+    <contextFactory name="functions" class="org.nuxeo.template.brochure.context.BrochureContextFactory">
+     <aliasName>brochure</aliasName>
+    </contextFactory>
+
+ </extension>
+
+ </component>
