@@ -12,7 +12,7 @@ public class BrochureContextFactory implements ContextExtensionFactory {
     @Override
     public Object getExtension(DocumentModel currentDocument,
             DocumentWrapper wrapper, Map<String, Object> ctx) {
-        return new BrochureContext(currentDocument, wrapper);
+        return new BrochureContext(currentDocument, wrapper, ctx);
     }
 
 }
