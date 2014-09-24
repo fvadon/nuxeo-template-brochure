@@ -5,12 +5,12 @@
     <documentation>
       Adds utility functions in the context
       <ul>
-        <li>brochure.getChildrenPartsForGroup(brochureUID, userGroup)</li>
+        <li>brochure.getChildrenPartDocForCurrentUser():a list of Part children of the current Brochure if current user is member of the part:group metadata if Part (or if the metadata is not set)</li>
       </ul>
     </documentation>
 
-    <contextFactory name="functions" class="org.nuxeo.template.brochure.context.BrochureContextFactory">
-     <aliasName>brochure</aliasName>
+    <contextFactory name="brochure" class="org.nuxeo.template.brochure.BrochureContextFactory">
+     <aliasName>br</aliasName>
     </contextFactory>
 
  </extension>

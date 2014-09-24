@@ -6,6 +6,6 @@ Bundle-Version: 1.0.qualifier
 Bundle-Name: nuxeo-template-brochure
 Bundle-ManifestVersion: 2
 Nuxeo-Component: OSGI-INF/extensions/brochure-context-contrib.xml
-Bundle-SymbolicName: nuxeo-template-brochure
+Bundle-SymbolicName: org.nuxeo.template.brochure
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 

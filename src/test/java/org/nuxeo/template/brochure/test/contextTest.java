@@ -59,9 +59,9 @@ import com.google.inject.Inject;
     "org.nuxeo.template.manager.api",
     "org.nuxeo.ecm.platform.commandline.executor",
     "org.nuxeo.ecm.platform.login",
-    "org.nuxeo.ecm.platform.web.common"
+    "org.nuxeo.ecm.platform.web.common",
 	})
-@LocalDeploy({"org.nuxeo.template.brochure.test:template-brochure-test-contrib.xml"})
+@LocalDeploy({"org.nuxeo.template.brochure:OSGI-INF/extensions/brochure-context-contrib.xml"})
 public class contextTest {
 
     @Inject
@@ -98,7 +98,7 @@ public class contextTest {
         brochure = coreSession.createDocument(brochure);
         Assert.assertNotNull(brochure);
 
-        // Create a few parts with different type of criteria.
+        // Create a few parts with different type of group.
         DocumentModel part = coreSession.createDocumentModel("/Brochure/", "Part_intro",
                 "Part");
         part.setPropertyValue("dc:title","Intro");
@@ -112,21 +112,21 @@ public class contextTest {
                 "Part");
         part.setPropertyValue("dc:title","part for sales");
         part.setPropertyValue("part:text_content", "I am a part for sales");
-        part.setPropertyValue("part:criteria", SALES_GROUP);
+        part.setPropertyValue("part:group", SALES_GROUP);
         Assert.assertNotNull(part);
         part = coreSession.createDocument(part);
         Assert.assertNotNull(part);
-        Assert.assertEquals(SALES_GROUP,part.getPropertyValue("part:criteria"));
+        Assert.assertEquals(SALES_GROUP,part.getPropertyValue("part:group"));
 
         part = coreSession.createDocumentModel("/Brochure/", "Part_marketing",
                 "Part");
         part.setPropertyValue("dc:title","part for marketing");
         part.setPropertyValue("part:text_content", "I am a part for marketing");
-        part.setPropertyValue("part:criteria", MARKETING_GROUP);
+        part.setPropertyValue("part:group", MARKETING_GROUP);
         Assert.assertNotNull(part);
         part = coreSession.createDocument(part);
         Assert.assertNotNull(part);
-        Assert.assertEquals(MARKETING_GROUP,part.getPropertyValue("part:criteria"));
+        Assert.assertEquals(MARKETING_GROUP,part.getPropertyValue("part:group"));
 
 
      // giving permission to everyone on the doc

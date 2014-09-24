@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.template.api.context.DocumentWrapper;
 
 public class BrochureContext {
@@ -22,7 +23,7 @@ public class BrochureContext {
     }
 
     /**
-     * Returns the list of the Parts of the current Brochure doc for which the Criteria group matches on the current User group
+     * Returns the list of the Parts children of the current Brochure doc if the current user is member of part:group metadata, or if the metadata is not set.
      *
      * @return List<Object>
      * @throws Exception
@@ -31,9 +32,20 @@ public class BrochureContext {
     public List<Object> getChildrenPartDocForCurrentUser() throws Exception {
         List<DocumentModel> children = doc.getCoreSession().getChildren(
                 doc.getRef());
+
+        NuxeoPrincipal username = (NuxeoPrincipal) doc.getCoreSession().getPrincipal();
         List<Object> docs = new ArrayList<Object>();
         for (DocumentModel child : children) {
-            docs.add(nuxeoWrapper.wrap(child));
+            if(child.getProperty("part", "group")!=null) {
+                if(username.isMemberOf(child.getProperty("part", "group").toString())){
+                    docs.add(nuxeoWrapper.wrap(child));
+                }
+            }
+            else {
+                docs.add(nuxeoWrapper.wrap(child));
+            }
+
+
         }
         return docs;
     }
