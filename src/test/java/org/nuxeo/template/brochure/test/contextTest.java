@@ -8,7 +8,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 
 import javax.security.auth.login.LoginContext;
@@ -76,6 +80,7 @@ public class contextTest {
     protected static final String MARKETING_USER = "MarketingUser";
     protected static final String SALES_GROUP = "sales_group";
     protected static final String MARKETING_GROUP = "marketing_group";
+    protected static String brochureId;
 
 
 
@@ -96,6 +101,7 @@ public class contextTest {
                 "Brochure");
         Assert.assertNotNull(brochure);
         brochure = coreSession.createDocument(brochure);
+        brochureId=brochure.getId();
         Assert.assertNotNull(brochure);
 
         // Create a few parts with different type of group.
@@ -178,6 +184,7 @@ public class contextTest {
 
         DocumentRef brochureRef = brochure.getRef();
 
+
         coreSession.save();
         LoginContext loginContext = Framework.loginAsUser(SALES_USER);
 
@@ -201,6 +208,8 @@ public class contextTest {
 
         assertTrue(xmlContent.contains("I am a part for sales"));
         assertTrue(!xmlContent.contains("I am a part for marketing"));
+        assertTrue(!xmlContent.contains("I am a Brochure"));
+
         session.close();
         loginContext.logout();
 
@@ -210,10 +219,21 @@ public class contextTest {
 
     }
 
-    protected Blob getTemplateBlob() {
+    protected Blob getTemplateBlob() throws IOException {
         File file = FileUtils.getResourceFileFromContext("data/test.ftl");
-        Blob fileBlob = new FileBlob(file);
+        File tempFile = new File(file.getPath().substring(0, file.getPath().lastIndexOf("/"))+"/temp.ftl");
+        tempFile.createNewFile();
+        FileUtils.copy(file, tempFile);
+
+        FileWriter fw = new FileWriter(tempFile,true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        //This will add a new line to the file content
+        pw.println("${brochure.getDocument(\""+brochureId+"\").title}");
+        pw.close();
+        Blob fileBlob = new FileBlob(tempFile);
         fileBlob.setFilename("test.ftl");
+        tempFile.deleteOnExit();
         return fileBlob;
     }
 

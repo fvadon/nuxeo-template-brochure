@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentRef;
+import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.template.api.context.DocumentWrapper;
 
@@ -23,8 +25,8 @@ public class BrochureContext {
     }
 
     /**
-     * Returns the list of the Parts children of the current Brochure doc if the current user is member of part:group metadata, or if the metadata is not set.
-     *
+     * Returns the list of Parts of the current Brochure doc if the current user is member of part:group metadata, or if the metadata is not set.
+     * Brochure is folderish, Parts are children of Brochure
      * @return List<Object>
      * @throws Exception
      */
@@ -48,6 +50,18 @@ public class BrochureContext {
 
         }
         return docs;
+    }
+
+    /**
+     * Returns the document from the document ID
+     * @param DocumentId
+     * @return
+     * @throws Exception
+     */
+
+    public Object getDocument(String DocumentId) throws Exception {
+        DocumentRef ref = new IdRef(DocumentId);
+        return nuxeoWrapper.wrap(doc.getCoreSession().getDocument(ref));
     }
 
 
