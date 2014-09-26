@@ -16,6 +16,7 @@
 	
     <modules>
       <module>nuxeo-template-brochure</module>
+	  <module>nuxeo-template-brochure-mp</module>
     </modules>
     <dependencyManagement>
 	
@@ -47,7 +48,7 @@
 				<enabled>false</enabled>
 			</releases>
 			<snapshots>
-				<updatePolicy>always</updatePolicy>
+				<updatePolicy>daily</updatePolicy>
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
