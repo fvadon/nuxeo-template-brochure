@@ -1,12 +1,11 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
-<package type="addon" name="nuxeo-sample" version="@VERSION@">
-  <title>Nuxeo Sample</title>
+<package type="addon" name="nuxeo-labs-brochure" version="@VERSION@">
+  <title>Nuxeo Labs Brochure</title>
   <description>
-    <p>This addon adds the "sample project" functionality to Nuxeo.</p>
-    <p>Put here an HTML description of your Marketplace package.</p>
+    <p>This addons adds some function the context of template rendering to help creating dynamic brochures</p>
   </description>
   <home-page>http://doc.nuxeo.com/</home-page>
-  <vendor>Your company</vendor>
+  <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
   <!-- <hotreload-support>false</hotreload-support> -->
@@ -21,7 +20,7 @@
   <supported>false</supported>
   <platforms>
     <platform>cap-@DISTRIB_VERSION@</platform>
-    <platform>cap-@DISTRIB_VERSION@-HF*</platform>
+    <platform>cap-5.9.5</platform>
   </platforms>
   <!-- Dependencies on other packages -->
   <!-- <dependencies> -->
