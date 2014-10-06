@@ -10,6 +10,7 @@ import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.api.IdRef;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.template.api.context.DocumentWrapper;
+import org.nuxeo.template.context.BlobHolderWrapper;
 
 public class BrochureContext {
 
@@ -54,16 +55,24 @@ public class BrochureContext {
 
     /**
      * Returns the document from the document ID
-     * @param DocumentId
+     * @param documentId
      * @return
      * @throws Exception
      */
 
-    public Object getDocument(String DocumentId) throws Exception {
-        DocumentRef ref = new IdRef(DocumentId);
+    public Object getDocument(String documentId) throws Exception {
+        DocumentRef ref = new IdRef(documentId);
         return nuxeoWrapper.wrap(doc.getCoreSession().getDocument(ref));
     }
 
-
+    /**
+     * Returns a blob holder from the document ID
+     * @param documentId
+     * @return
+     */
+    public Object getBlobsForDocument(String documentId) {
+        DocumentRef ref = new IdRef(documentId);
+        return new BlobHolderWrapper(doc.getCoreSession().getDocument(ref));
+    }
 
 }
