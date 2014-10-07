@@ -24,6 +24,11 @@
         <artifactId>nuxeo-template-brochure</artifactId>
         <version>${nuxeo.distribution.version}</version>
       </dependency>
+	  <dependency>
+        <groupId>org.nuxeo.template.brochure</groupId>
+        <artifactId>nuxeo-template-brochure-we</artifactId>
+        <version>${nuxeo.distribution.version}</version>
+      </dependency>
     </dependencies>
 
 
