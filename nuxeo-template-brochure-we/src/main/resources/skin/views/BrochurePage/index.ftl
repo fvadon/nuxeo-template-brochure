@@ -1,22 +1,14 @@
 <@extends src="base.ftl">
-<@block name="header">You signed in as ${Context.principal}</@block>
 
 <@block name="content">
 
-<div style="margin: 10px 10px 10px 10px">
-<p>
-	Welcome to the brochure browser. </br>
-	Here is the list of brochures you have access to:
-</p>
-
+<div class="alert alert-info" role="alert">Brochures you have access to</div>
+<ul>
 <#list availableHandbooks as handbook>
-	
-	<div>
+	<li>	
 		<a href="${Context.getBaseURL()}${Context.getBasePath()}/brochure/${handbook.id}">${handbook.title}</a>
-	</div>
+	</li>
 </#list>
-
-</div>
-
+</ul>
 </@block>
 </@extends>

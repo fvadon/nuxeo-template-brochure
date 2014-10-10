@@ -2,33 +2,29 @@
 <head>
   <title>
      <@block name="title">
-     WebEngine Project
+     Nuxeo Brochure
      </@block>
   </title>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
   <link rel="stylesheet" href="${skinPath}/css/site.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="shortcut icon" href="${skinPath}/image/favicon.gif" />
+  <link rel="stylesheet" href="${skinPath}/css/bootstrap.min.css">
+  <link rel="icon" href="${skinPath}/img/favicon.png" />
+  <link rel="shortcut icon" href="${skinPath}/img/favicon.ico" />
   <@block name="stylesheets" />
   <@block name="header_scripts" />
 </head>
 
-<body style="margin:0px 0px 0px 0px;">
 
-  <table class="main">
-    <tr>
-      <td>
-        <table class="header">
-            <tr>
-            <td><img src="${skinPath}/img/logo.png"</td>
-            <td align="right"><@block name="header">The Header</@block></td>
-            </tr>
-        </table>
-      </td>
-    </tr>
-    <tr height="98%">
-      <td valign="top"><@block name="content">The Content</@block></td>
-    </tr>
-  </table/>
+<body>
+  		<@block name="header">
+		<div class="header page-header">
+			<a href="${This.path}"><h1>Nuxeo Brochure <small>Dynamically generated brochures</small></h1></a>
+		</div>
+    	</@block>
+
+	<div class="container-fluid">	
+    		<@block name="content">The Content</@block>
+	</div>
 
 </body>
 </html>
