@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.nuxeo.template.brochure</groupId>
     <artifactId>nuxeo-template-brochure-parent</artifactId>
-    <version>5.9.6-SNAPSHOT</version>
+    <version>7.1-SNAPSHOT</version>
   </parent>
   <groupId>org.nuxeo.template.brochure</groupId>
   <artifactId>nuxeo-template-brochure-we</artifactId>
-  <version>5.9.6-SNAPSHOT</version>
+  <version>7.1-SNAPSHOT</version>
   <name>nuxeo-template-brochure-we</name>
   <description/>
   <dependencies>
