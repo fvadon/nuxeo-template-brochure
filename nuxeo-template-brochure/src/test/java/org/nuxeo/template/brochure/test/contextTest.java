@@ -49,6 +49,8 @@ import com.google.inject.Inject;
 
 /**
  * @author fvadon
+ * ON specific branch, all the use management done here is not necessary and the name of the test method is not relevant anymore
+ * did not corrected due to lack of time
  */
 
 @RunWith(FeaturesRunner.class)
@@ -97,42 +99,12 @@ public class contextTest {
     protected TemplateBasedDocument setupTestDocs() throws Exception {
 
         //Create the parent Brochure, will have template associated later
-        DocumentModel brochure = coreSession.createDocumentModel("/", "Brochure",
-                "Brochure");
+        DocumentModel brochure = coreSession.createDocumentModel("/", "SellSheet",
+                "SellSheet");
         Assert.assertNotNull(brochure);
         brochure = coreSession.createDocument(brochure);
         brochureId=brochure.getId();
         Assert.assertNotNull(brochure);
-
-        // Create a few parts with different type of group.
-        DocumentModel part = coreSession.createDocumentModel("/Brochure/", "Part_intro",
-                "Part");
-        part.setPropertyValue("dc:title","Intro");
-        part.setPropertyValue("part:text_content", "I am a text content");
-        Assert.assertNotNull(part);
-        part = coreSession.createDocument(part);
-        Assert.assertNotNull(part);
-        Assert.assertEquals("I am a text content",part.getPropertyValue("part:text_content"));
-
-        part = coreSession.createDocumentModel("/Brochure/", "Part_sales",
-                "Part");
-        part.setPropertyValue("dc:title","part for sales");
-        part.setPropertyValue("part:text_content", "I am a part for sales");
-        part.setPropertyValue("part:group", SALES_GROUP);
-        Assert.assertNotNull(part);
-        part = coreSession.createDocument(part);
-        Assert.assertNotNull(part);
-        Assert.assertEquals(SALES_GROUP,part.getPropertyValue("part:group"));
-
-        part = coreSession.createDocumentModel("/Brochure/", "Part_marketing",
-                "Part");
-        part.setPropertyValue("dc:title","part for marketing");
-        part.setPropertyValue("part:text_content", "I am a part for marketing");
-        part.setPropertyValue("part:group", MARKETING_GROUP);
-        Assert.assertNotNull(part);
-        part = coreSession.createDocument(part);
-        Assert.assertNotNull(part);
-        Assert.assertEquals(MARKETING_GROUP,part.getPropertyValue("part:group"));
 
 
      // giving permission to everyone on the doc
@@ -153,7 +125,6 @@ public class contextTest {
         templateDoc.setProperty("file", "content", fileBlob);
         templateDoc = coreSession.createDocument(templateDoc);
         coreSession.setACP(templateDoc.getRef(), acp, false);
-
 
         TemplateSourceDocument templateSource = templateDoc.getAdapter(TemplateSourceDocument.class);
         Assert.assertNotNull(templateSource);
@@ -206,9 +177,6 @@ public class contextTest {
         assertTrue(xmlContent.contains(brochure.getId()));
         assertTrue(xmlContent.contains(SALES_USER));
 
-        assertTrue(xmlContent.contains("I am a part for sales"));
-        assertTrue(!xmlContent.contains("I am a part for marketing"));
-        assertTrue(!xmlContent.contains("I am a Brochure"));
 
         session.close();
         loginContext.logout();
